@@ -43,6 +43,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "minecraft-data": "github:wupengabc/node-minecraft-data",
     "prismarine-biome": "^1.2.0",
     "prismarine-block": "^1.14.1",
     "prismarine-nbt": "^2.2.1",

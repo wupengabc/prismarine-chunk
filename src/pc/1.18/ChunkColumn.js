@@ -13,6 +13,8 @@ const CAVES_UPDATE_WORLD_HEIGHT = 384
 module.exports = (Block, mcData) => {
   // 1.21.5+ writes no size prefix before chunk containers, it's computed dynamically to save 1 byte
   const noSizePrefix = mcData.version['>=']('1.21.5')
+  // 26.1+ adds a fluidCount short after nonEmptyBlockCount in each chunk section
+  const hasFluidCount = mcData.version['>=']('26.1.2')
   return class ChunkColumn extends CommonChunkColumn {
     static get section () { return ChunkSection }
     constructor (options) {
@@ -252,7 +254,7 @@ module.exports = (Block, mcData) => {
     load (data) {
       const reader = SmartBuffer.fromBuffer(data)
       for (let i = 0; i < this.numSections; ++i) {
-        this.sections[i] = ChunkSection.read(reader, this.maxBitsPerBlock, noSizePrefix)
+        this.sections[i] = ChunkSection.read(reader, this.maxBitsPerBlock, noSizePrefix, hasFluidCount)
         this.biomes[i] = BiomeSection.read(reader, this.maxBitsPerBiome, noSizePrefix)
       }
     }

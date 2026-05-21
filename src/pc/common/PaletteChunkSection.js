@@ -96,8 +96,12 @@ class ChunkSection {
     })
   }
 
-  static read (smartBuffer, maxBitsPerBlock = constants.GLOBAL_BITS_PER_BLOCK, noSizePrefix) {
+  static read (smartBuffer, maxBitsPerBlock = constants.GLOBAL_BITS_PER_BLOCK, noSizePrefix, hasFluidCount) {
     const solidBlockCount = smartBuffer.readInt16BE()
+    // 26.1+ adds a fluidCount short after nonEmptyBlockCount
+    if (hasFluidCount) {
+      smartBuffer.readInt16BE() // fluidCount — not used by prismarine-chunk but must be consumed
+    }
     const bitsPerBlock = smartBuffer.readUInt8()
     if (bitsPerBlock > 16) throw new Error(`Bits per block is too big: ${bitsPerBlock}`)
     // Case 1: Single Value Container (all blocks in the section are the same)
