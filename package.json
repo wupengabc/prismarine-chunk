@@ -1,6 +1,6 @@
 {
   "name": "@wp2508/prismarine-chunk",
-  "version": "1.41.0",
+  "version": "1.41.1",
   "description": "A class to hold chunk data for prismarine",
   "main": "index.js",
   "types": "./types/index.d.ts",
