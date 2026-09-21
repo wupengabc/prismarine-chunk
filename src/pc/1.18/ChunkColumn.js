@@ -261,8 +261,8 @@ module.exports = (Block, mcData) => {
     loadParsedLight (skyLight, blockLight, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask) {
       function readSection (sections, data, lightMask, pLightMask, emptyMask, pEmptyMask) {
         let currentSectionIndex = 0
-        const incomingLightMask = BitArray.fromLongArray(pLightMask, 1)
-        const incomingEmptyMask = BitArray.fromLongArray(pEmptyMask, 1)
+        const incomingLightMask = BitArray.fromLightMask(pLightMask, 1)
+        const incomingEmptyMask = BitArray.fromLightMask(pEmptyMask, 1)
 
         for (let y = 0; y < sections.length; y++) {
           const isEmpty = incomingEmptyMask.get(y)

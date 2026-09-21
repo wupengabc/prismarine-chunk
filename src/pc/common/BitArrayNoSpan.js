@@ -75,6 +75,35 @@ class BitArray {
     return bitArray
   }
 
+  // 26.3 replaced the four light masks with BitSet byte arrays on the wire
+  // (ByteBufCodecs.BIT_SET = a varint byte length + raw bytes). BitSet.valueOf
+  // maps byte b to bit indices 8b..8b+7, while this BitArray stores bit index i
+  // in word floor(i/32)*2 at shift i%32. Four consecutive bytes therefore fill
+  // one 32-bit word, so each byte folds into the low word of its long.
+  static fromByteArray (buffer, bitsPerValue) {
+    const byteLength = Math.max(4, Math.ceil(buffer.length / 4) * 4)
+    const wordCount = byteLength / 4
+    const bitArray = new BitArray({
+      capacity: Math.floor(64 / bitsPerValue) * wordCount,
+      bitsPerValue
+    })
+    for (let b = 0; b < buffer.length; b++) {
+      const wordIndex = Math.floor(b / 4)
+      const shift = 8 * (b % 4)
+      bitArray.data[wordIndex * 2] = (bitArray.data[wordIndex * 2] | (buffer[b] << shift)) >>> 0
+    }
+    return bitArray
+  }
+
+  // Accepts either the pre-26.3 array of [lo, hi] long pairs or the 26.3 BitSet
+  // byte array, so shared chunk versions can handle both wire formats.
+  static fromLightMask (mask, bitsPerValue) {
+    if (mask && (Buffer.isBuffer(mask) || ArrayBuffer.isView(mask))) {
+      return BitArray.fromByteArray(mask, bitsPerValue)
+    }
+    return BitArray.fromLongArray(mask, bitsPerValue)
+  }
+
   static or (a, b) {
     const long = a.data.length > b.data.length ? a.data : b.data
     const short = a.data.length > b.data.length ? b.data : a.data
