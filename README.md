@@ -1,6 +1,8 @@
 # prismarine-chunk
 
-[![NPM version](https://img.shields.io/npm/v/prismarine-chunk.svg)](http://npmjs.com/package/prismarine-chunk)
+> **Fork (wupengabc):** adds **Minecraft 26.3 (protocol 777)** support. Published to npm as [`@wp2508/prismarine-chunk`](https://www.npmjs.com/package/@wp2508/prismarine-chunk) — install with `npm install @wp2508/prismarine-chunk` and `require('@wp2508/prismarine-chunk')`. Upstream: [PrismarineJS/prismarine-chunk](https://github.com/PrismarineJS/prismarine-chunk).
+
+[![NPM version](https://img.shields.io/npm/v/@wp2508/prismarine-chunk.svg?color=success&label=npm%20package&logo=npm)](https://www.npmjs.com/package/@wp2508/prismarine-chunk)
 [![Build Status](https://github.com/PrismarineJS/prismarine-chunk/workflows/CI/badge.svg)](https://github.com/PrismarineJS/prismarine-chunk/actions?query=workflow%3A%22CI%22)
 [![Discord](https://img.shields.io/badge/chat-on%20discord-brightgreen.svg)](https://discord.gg/GsEFRM8)
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-brightgreen.svg)](https://gitter.im/PrismarineJS/general)
@@ -8,13 +10,13 @@
 
 [![Try it on gitpod](https://img.shields.io/badge/try-on%20gitpod-brightgreen.svg)](https://gitpod.io/#https://github.com/PrismarineJS/prismarine-chunk)
 
-A class to hold chunk data for Minecraft: PC 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16 and 26.1 and Bedrock Edition 0.14 and 1.0, 1.16, 1.17, 1.18, 1.19, 1.20 and 1.21
+A class to hold chunk data for Minecraft: PC 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 26.1, 26.2 and 26.3, and Bedrock Edition 0.14 and 1.0, 1.16, 1.17, 1.18, 1.19, 1.20 and 1.21
 
 ## Usage
 
 ```js
 const registry = require('prismarine-registry')('1.8')
-const ChunkColumn = require('prismarine-chunk')(registry)
+const ChunkColumn = require('@wp2508/prismarine-chunk')(registry)
 const { Vec3 } = require("vec3")
 
 const chunk = new ChunkColumn()
