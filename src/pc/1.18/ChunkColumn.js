@@ -244,6 +244,10 @@ module.exports = (Block, mcData) => {
     }
 
     loadBiomes (biomes) {
+      const reader = SmartBuffer.fromBuffer(biomes)
+      const sections = Array.from({ length: this.numSections }, () => BiomeSection.read(reader, this.maxBitsPerBiome, noSizePrefix))
+      if (reader.remaining() !== 0) throw new Error('Unexpected trailing chunk biome data')
+      this.biomes = sections
     }
 
     dumpBiomes (biomes) {
