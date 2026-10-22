@@ -1,6 +1,6 @@
 {
   "name": "@wp2508/prismarine-chunk",
-  "version": "1.41.4",
+  "version": "1.41.5",
   "description": "A class to hold chunk data for prismarine",
   "main": "index.js",
   "types": "./types/index.d.ts",
@@ -48,9 +48,9 @@
   "dependencies": {
     "minecraft-data": "npm:@wp2508/minecraft-data@^3.111.7",
     "prismarine-biome": "^1.2.0",
-    "prismarine-block": "^1.14.1",
+    "prismarine-block": "npm:@wp2508/prismarine-block@^1.23.1",
     "prismarine-nbt": "^2.2.1",
-    "prismarine-registry": "^1.1.0",
+    "prismarine-registry": "npm:@wp2508/prismarine-registry@^1.12.1",
     "smart-buffer": "^4.1.0",
     "uint4": "^0.1.2",
     "vec3": "^0.1.3",
